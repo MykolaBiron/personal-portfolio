@@ -3,6 +3,7 @@ import * as d3 from 'd3'
 import './App.css'
 import profileImg from '../images/photo_2026-03-12_15-16-07.jpg'
 
+import ProjectsSection from './ProjectsSection'
 const modules = ['React', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Spring']
 
 const commandLog = [
@@ -20,7 +21,7 @@ const commandLog = [
 
 const metrics = [
   { label: 'Experience', value: '1+', unit: 'yrs' },
-  { label: 'Projects', value: '50+', unit: 'deploys' },
+  { label: 'Projects', value: '15+', unit: 'deploys' },
   { label: 'Caffeine', value: '∞', unit: 'ml' },
 ]
 
@@ -81,8 +82,8 @@ function App() {
           </p>
 
           <div className="cta-row">
-            <button className="primary">Run Profile</button>
-            <button className="ghost">View Projects</button>
+            <button className="primary">View Projects</button>
+            <button className="ghost">Visit GitHub</button>
           </div>
 
           <div className="modules">
@@ -328,6 +329,8 @@ function App() {
           })}
         </div>
       </section>
+
+      <ProjectsSection />
 
       <article className="code-window contact-window" style={{ maxWidth: '600px', margin: '0 auto', marginTop: '4rem', marginBottom: '4rem' }}>
         <header>

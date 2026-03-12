@@ -1,9 +1,9 @@
 import React from 'react';
-import { FiExternalLink } from 'react-icons/fi';
-import { HiOutlineWrenchContent } from 'react-icons/hi2';
+import { FiFolder, FiExternalLink } from 'react-icons/fi';
+import { HiOutlineWrenchScrewdriver } from 'react-icons/hi2';
 import { 
   SiNextdotjs, SiTypescript, SiTailwindcss, SiReact, 
-  SiMongodb, SiAstro, SiVitedotjs, SiJavascript, 
+  SiMongodb, SiAstro, SiVite, SiJavascript, 
   SiFramer 
 } from 'react-icons/si';
 
@@ -34,7 +34,7 @@ const projects = [
     devStatus: 'Under Development',
     link: '#',
     description: 'A real-time chat app, reminiscent of WhatsApp, allowing users to register, login, and connect with friends and family through instant messaging.',
-    icons: [<SiVitedotjs />, <SiReact />, <SiJavascript />, <SiMongodb />],
+    icons: [<SiVite />, <SiReact />, <SiJavascript />, <SiMongodb />],
     // Purple / dark top
     mockTop: 'linear-gradient(135deg, #322659 0%, #1c1538 100%)',
     baseColor: '#1a0438'
@@ -43,10 +43,12 @@ const projects = [
 
 export default function ProjectsSection() {
   return (
-    <section className="projects" id="projects">
-      <div className="projects-header">
-        <h2>My Projects <span className="highlight">&gt;</span></h2>
-        <div className="line"></div>
+    <section className="projects" id="projects" style={{ marginTop: '4rem', marginBottom: '4rem' }}>
+      <div className="projects-header" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+        <FiFolder style={{ color: '#F05F40', fontSize: '2rem' }} />
+        <h2 style={{ fontFamily: 'monospace', fontSize: '2rem', margin: 0, fontWeight: 600, color: '#e5e7eb' }}>
+          $ ls -la ~/projects
+        </h2>
       </div>
       
       <div className="projects-grid">
@@ -76,7 +78,7 @@ export default function ProjectsSection() {
                 {p.devStatus ? (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
                     <span className="under-dev-badge">
-                      <HiOutlineWrenchContent size={16} /> {p.devStatus}
+                      <HiOutlineWrenchScrewdriver size={16} /> {p.devStatus}
                     </span>
                     <a href={p.link} className="project-link-btn" aria-label={`Link to ${p.title}`}>
                       <FiExternalLink size={20} />
