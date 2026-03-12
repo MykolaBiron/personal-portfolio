@@ -4,6 +4,7 @@ import './App.css'
 import profileImg from '../images/photo_2026-03-12_15-16-07.jpg'
 
 import ProjectsSection from './ProjectsSection'
+import MobileNav from './MobileNav'
 const modules = ['React', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Spring']
 
 const commandLog = [
@@ -69,7 +70,7 @@ function App() {
       <div className="grid-overlay" aria-hidden="true" />
       <div className="noise-overlay" aria-hidden="true" />
 
-      <section className="hero">
+      <section className="hero" id="hero">
         <div className="hero-copy">
           <span className="status-pill">system.kernel :: v2.5.0 online</span>
           <p className="eyebrow">Architect</p>
@@ -327,7 +328,7 @@ function App() {
 
       <ProjectsSection />
 
-      <article className="code-window contact-window" style={{ maxWidth: '600px', margin: '0 auto', marginTop: '4rem', marginBottom: '4rem' }}>
+      <article id="contact" className="code-window contact-window" style={{ maxWidth: '600px', margin: '0 auto', marginTop: '4rem', marginBottom: '4rem' }}>
         <header>
           <span />
           <span />
@@ -364,6 +365,7 @@ function App() {
           </code>
         </pre>
       </article>
+      <MobileNav />
       <footer className="site-footer">
         <div>
         <p className="footer-name">Mykola Biron</p>
