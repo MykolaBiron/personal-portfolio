@@ -97,6 +97,10 @@ h1 {
   letter-spacing: 0.08em;
   border: 1px solid transparent;
   cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 

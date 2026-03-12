@@ -84,7 +84,7 @@ function App() {
 
           <div className="cta-row">
             <button className="primary">View Projects</button>
-            <button className="ghost">Visit GitHub</button>
+            <a href="https://github.com/MykolaBiron" target="_blank" rel="noopener noreferrer" className="ghost">Visit GitHub</a>
           </div>
 
           <div className="modules">
@@ -344,9 +344,10 @@ function App() {
               { num: 3, text: <><span style={{ color: '#e87d3e' }}>"email"</span><span style={{ color: '#d4d4d4' }}>: </span><span style={{ color: '#e87d3e' }}>"mykolabiron@gmail.com"</span><span style={{ color: '#d4d4d4' }}>,</span></>, indent: 1 },
               { num: 4, text: <><span style={{ color: '#e87d3e' }}>"socials"</span><span style={{ color: '#d4d4d4' }}>: </span><span style={{ color: '#e5b567' }}>{'{'}</span></>, indent: 1 },
               { num: 5, text: <><span style={{ color: '#e87d3e' }}>"github"</span><span style={{ color: '#d4d4d4' }}>: </span>
-              <span style={{ color: '#e87d3e' }}><a href="https://github.com/Momin-786" style={{ color: 'inherit', textDecoration: 'none' }}>"@MykolaBiron"</a></span><span style={{ color: '#d4d4d4' }}>,</span></>, indent: 2 },
+              <span style={{ color: '#e87d3e' }}><a href="https://github.com/MykolaBiron" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>"@MykolaBiron"</a></span><span style={{ color: '#d4d4d4' }}>,</span></>, indent: 2 },
               { num: 6, text: <><span style={{ color: '#e87d3e' }}>"linkedin"</span><span style={{ color: '#d4d4d4' }}>: </span><span style={{ color: '#e87d3e' }}>
-                <a href="https://www.linkedin.com/in/abdul-momin7863/" style={{ color: 'inherit', textDecoration: 'none' }}>"@MykolaBiron"</a></span><span style={{ color: '#d4d4d4' }}>,</span></>, indent: 2 },
+                <a href="https://www.linkedin.com/in/mykola-biron-a4aa972a6/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>"@MykolaBiron"</a>
+                </span><span style={{ color: '#d4d4d4' }}>,</span></>, indent: 2 },
               { num: 7, text: <><span style={{ color: '#e87d3e' }}>"twitter"</span><span style={{ color: '#d4d4d4' }}>: </span><span style={{ color: '#e87d3e' }}><a href="https://twitter.com/abdulmomin7863" style={{ color: 'inherit', textDecoration: 'none' }}>"@MykolaBiron"</a></span></>, indent: 2 },
               { num: 8, text: <><span style={{ color: '#e5b567' }}>{'}'}</span><span style={{ color: '#d4d4d4' }}>,</span></>, indent: 1 },
               { num: 9, text: <><span style={{ color: '#e87d3e' }}>"location"</span><span style={{ color: '#d4d4d4' }}>: </span><span style={{ color: '#e87d3e' }}>"Hamburg, Germany"</span></>, indent: 1 },

@@ -10,12 +10,12 @@ import {
 const projects = [
   {
     id: 'p0a1d9',
-    title: 'NutrientAI',
+    title: 'FoodAdvisorAI',
     devStatus: null,
     link: '#',
     timeframe: '2025 — Present',
     company: 'Product Build',
-    description: 'An educational platform designed to empower students with easy access to study materials. Students can browse & download PDFs files.',
+    description: 'An AI-powered nutrition tracking application that uses deep learning to identify food from images and automatically track nutritional intake.',
     icons: [<SiNextdotjs />, <SiTypescript />, <SiTailwindcss />, <SiReact />],
     tags: ['Next.js', 'TypeScript', 'Tailwind', 'React']
   },
@@ -37,7 +37,7 @@ const projects = [
     link: '#',
     timeframe: '2026 — Present',
     company: 'Product Build',
-    description: 'A real-time chat app, reminiscent of WhatsApp, allowing users to register, login, and connect with friends and family through instant messaging.',
+    description: 'Computer Vision app that automates wildlife photography by extracting high-fidelity stills from 4K video',
     icons: [<SiVite />, <SiReact />, <SiJavascript />, <SiMongodb />],
     tags: ['Vite', 'React', 'JavaScript', 'MongoDB']
   }
