@@ -867,7 +867,7 @@ h1 {
 .timeline-card .insertions { color: #66ff8e; }
 .timeline-card .deletions  { color: #ff6b6b; }
 
-/* responsive */
+/* responsive — tablet */
 @media (max-width: 860px) {
   .timeline-axis { left: 16px; transform: none; }
 
@@ -889,6 +889,61 @@ h1 {
   .timeline-row .timeline-date-badge,
   .timeline-row.left .timeline-date-badge,
   .timeline-row.right .timeline-date-badge    { grid-column: 2; grid-row: 2; margin: 0.75rem 0 0 1.25rem; justify-self: start; }
+}
+
+/* responsive — mobile: drop the grid entirely, stack as plain cards */
+@media (max-width: 700px) {
+  .timeline-grid {
+    gap: 2rem;
+    padding-left: 0;
+    padding-bottom: 2rem;
+  }
+
+  /* hide decorative axis line on mobile */
+  .timeline-axis {
+    display: none;
+  }
+
+  .timeline-row,
+  .timeline-row.left,
+  .timeline-row.right {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  /* hide the dot marker — redundant without the axis */
+  .timeline-row .timeline-marker,
+  .timeline-row.left .timeline-marker,
+  .timeline-row.right .timeline-marker {
+    display: none;
+  }
+
+  /* date badge above the card, left-aligned */
+  .timeline-row .timeline-date-badge,
+  .timeline-row.left .timeline-date-badge,
+  .timeline-row.right .timeline-date-badge {
+    order: -1;
+    margin: 0;
+    align-self: flex-start;
+  }
+
+  /* card fills full width, no side margins */
+  .timeline-row .timeline-card,
+  .timeline-row.left .timeline-card,
+  .timeline-row.right .timeline-card {
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .project-card-ux {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 
