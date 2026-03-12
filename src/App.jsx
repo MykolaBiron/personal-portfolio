@@ -257,11 +257,6 @@ function App() {
           ))}
         </div>
       </section>
-
-      
-      
-      <section className="projects" id="projects">
-      </section>
       <section className="timeline" id="experience">
         <div className="section-header">
           <span className="prompt">⌘</span>

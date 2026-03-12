@@ -9,100 +9,141 @@ import {
 
 const projects = [
   {
+    id: 'p0a1d9',
     title: 'ARMS v3',
     devStatus: null,
     link: '#',
+    timeframe: '2025 — Present',
+    company: 'Product Build',
     description: 'An educational platform designed to empower students with easy access to study materials. Students can browse & download PDFs files.',
     icons: [<SiNextdotjs />, <SiTypescript />, <SiTailwindcss />, <SiReact />],
-    // Deep purple top
-    mockTop: 'linear-gradient(135deg, #44569e 0%, #302660 100%)',
-    baseColor: '#2b0c51'
+    tags: ['Next.js', 'TypeScript', 'Tailwind', 'React']
   },
   {
+    id: 'p3f2b1',
     title: 'Vortexa',
     devStatus: null,
     link: '#',
+    timeframe: '2025 — 2026',
+    company: 'Product Build',
     description: 'Stay informed about current conditions, forecasts, and astronomical data, and gain valuable insights into current weather patterns and trends.',
     icons: [<SiAstro />, <SiReact />, <SiTypescript />, <SiTailwindcss />],
-    // Blue / cyan top
-    mockTop: 'linear-gradient(135deg, #10668a 0%, #143555 100%)',
-    baseColor: '#120531',
-    hoverView: true
+    tags: ['Astro', 'React', 'TypeScript', 'Tailwind']
   },
   {
+    id: 'p8c7e5',
     title: 'XRecon',
     devStatus: 'Under Development',
     link: '#',
+    timeframe: '2026 — Present',
+    company: 'Product Build',
     description: 'A real-time chat app, reminiscent of WhatsApp, allowing users to register, login, and connect with friends and family through instant messaging.',
     icons: [<SiVite />, <SiReact />, <SiJavascript />, <SiMongodb />],
-    // Purple / dark top
-    mockTop: 'linear-gradient(135deg, #322659 0%, #1c1538 100%)',
-    baseColor: '#1a0438'
+    tags: ['Vite', 'React', 'JavaScript', 'MongoDB']
   }
 ];
 
 export default function ProjectsSection() {
   return (
-    <section className="projects" id="projects" style={{ marginTop: '4rem', marginBottom: '4rem' }}>
+    <section className="projects timeline" id="projects" style={{ marginTop: '4rem', marginBottom: '4rem' }}>
       <div className="projects-header" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
         <FiFolder style={{ color: '#F05F40', fontSize: '2rem' }} />
         <h2 style={{ fontFamily: 'monospace', fontSize: '2rem', margin: 0, fontWeight: 600, color: '#e5e7eb' }}>
           $ ls -la ~/projects
         </h2>
       </div>
-      
-      <div className="projects-grid">
-        {projects.map((p, idx) => (
-          <article 
-            key={idx} 
-            className="project-card"
-            style={{ '--base-bg': p.baseColor }}
-          >
-            {p.hoverView && (
-              <div className="project-view-cursor">View</div>
-            )}
-            
-            <div className="project-img-wrapper" style={{ background: p.mockTop }}>
-              <div className="mock-img"></div>
-              {/* Swoosh shape matching the design */}
-              <div className="project-swoosh" style={{ color: p.baseColor }}>
-                <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                  <path fill="currentColor" d="M0,256L80,224C160,192,320,128,480,122.7C640,117,800,171,960,181.3C1120,192,1280,149,1360,128L1440,107L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
-                </svg>
-              </div>
-            </div>
-            
-            <div className="project-content" style={{ background: p.baseColor }}>
-              <div className="project-title-row">
-                <h3>{p.title}</h3>
-                {p.devStatus ? (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                    <span className="under-dev-badge">
-                      <HiOutlineWrenchScrewdriver size={16} /> {p.devStatus}
-                    </span>
-                    <a href={p.link} className="project-link-btn" aria-label={`Link to ${p.title}`}>
-                      <FiExternalLink size={20} />
-                    </a>
+
+      <div className="timeline-grid projects-timeline-grid">
+        <div className="timeline-axis" aria-hidden="true" />
+        {projects.map((project, index) => {
+          const isLeft = index % 2 === 0;
+
+          return (
+            <div key={project.id} className={`timeline-row ${isLeft ? 'left' : 'right'}`}>
+              {isLeft ? (
+                <>
+                  <article className="timeline-card project-card-ux">
+                    <header>
+                      <span className="commit-hash">{project.id}</span>
+                      <span className="branch-pill">HEAD → project</span>
+                      <span className="company-label">{project.company}</span>
+                    </header>
+                    <div className="timeline-body">
+                      <h3>{project.title}</h3>
+                      <p className="project-summary">{project.description}</p>
+                      <div className="tag-grid">
+                        {project.tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <footer className="project-footer">
+                      <div className="project-stack-icons" aria-label={`${project.title} tech stack`}>
+                        {project.icons.map((icon, iconIndex) => (
+                          <span key={`${project.id}-icon-${iconIndex}`}>{icon}</span>
+                        ))}
+                      </div>
+                      <div className="project-actions">
+                        {project.devStatus && (
+                          <span className="project-status-pill">
+                            <HiOutlineWrenchScrewdriver size={14} /> {project.devStatus}
+                          </span>
+                        )}
+                        <a href={project.link} className="project-link-inline" aria-label={`Link to ${project.title}`}>
+                          <FiExternalLink size={16} />
+                        </a>
+                      </div>
+                    </footer>
+                  </article>
+                  <div className="timeline-marker"><span className="marker-dot" /></div>
+                  <div className="timeline-date-badge">
+                    <span>🗂</span> {project.timeframe}
                   </div>
-                ) : (
-                  <a href={p.link} className="project-link-btn" aria-label={`Link to ${p.title}`}>
-                    <FiExternalLink size={20} />
-                  </a>
-                )}
-              </div>
-              
-              <p className="project-desc">{p.description}</p>
-              
-              <div className="project-tech-row">
-                {p.icons.map((icon, i) => (
-                  <span key={i} style={{ color: '#fff', opacity: 0.8 }}>
-                    {icon}
-                  </span>
-                ))}
-              </div>
+                </>
+              ) : (
+                <>
+                  <div className="timeline-date-badge">
+                    <span>🗂</span> {project.timeframe}
+                  </div>
+                  <div className="timeline-marker"><span className="marker-dot" /></div>
+                  <article className="timeline-card project-card-ux">
+                    <header>
+                      <span className="commit-hash">{project.id}</span>
+                      <span className="branch-pill">HEAD → project</span>
+                      <span className="company-label">{project.company}</span>
+                    </header>
+                    <div className="timeline-body">
+                      <h3>{project.title}</h3>
+                      <p className="project-summary">{project.description}</p>
+                      <div className="tag-grid">
+                        {project.tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <footer className="project-footer">
+                      <div className="project-stack-icons" aria-label={`${project.title} tech stack`}>
+                        {project.icons.map((icon, iconIndex) => (
+                          <span key={`${project.id}-icon-${iconIndex}`}>{icon}</span>
+                        ))}
+                      </div>
+                      <div className="project-actions">
+                        {project.devStatus && (
+                          <span className="project-status-pill">
+                            <HiOutlineWrenchScrewdriver size={14} /> {project.devStatus}
+                          </span>
+                        )}
+                        <a href={project.link} className="project-link-inline" aria-label={`Link to ${project.title}`}>
+                          <FiExternalLink size={16} />
+                        </a>
+                      </div>
+                    </footer>
+                  </article>
+                </>
+              )}
             </div>
-          </article>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
