@@ -384,16 +384,16 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, rgba(125, 176, 255, 0.35), transparent 70%);
+  background: transparent;
 }
 
 .avatar-ring {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 3px solid transparent;
-  background: conic-gradient(#ff8a3c, #ffda4d, #7db0ff, #ff8a3c);
-  padding: 4px;
+  border: none;
+  background: transparent;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -408,14 +408,7 @@ h1 {
 }
 
 .status-led {
-  position: absolute;
-  bottom: 25px;
-  right: 40px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #4deeea;
-  box-shadow: 0 0 12px rgba(77, 238, 234, 0.8);
+  display: none;
 }
 
 .operator-fields {
