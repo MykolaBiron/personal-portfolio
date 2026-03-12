@@ -60,95 +60,7 @@ const experience = [
 ]
 
 function App() {
-  const skillsSvgRef = useRef(null)
-
-  useEffect(() => {
-    const svgElement = skillsSvgRef.current
-    if (!svgElement) return
-    let timer
-
-    const renderConstellation = () => {
-      if (timer) timer.stop()
-
-      const svg = d3.select(svgElement)
-      const width = svgElement.clientWidth || 720
-      const height = svgElement.clientHeight || 360
-
-      svg.selectAll('*').remove()
-      svg.attr('viewBox', `0 0 ${width} ${height}`)
-
-      const centerX = width / 2
-      const centerY = height / 2
-      const rx = Math.min(width, height) * 0.38
-      const ry = rx * 0.6
-
-      const nodes = skills.map((label, index) => ({
-        label,
-        angle: (index / skills.length) * Math.PI * 2,
-        speed: 0.00045 + (index % 3) * 0.00012,
-        offset: index % 2 === 0 ? 0 : 18,
-        band: index % 2 === 0 ? 'warm' : 'cool',
-      }))
-
-      const group = svg
-        .append('g')
-        .attr('transform', `translate(${centerX}, ${centerY})`)
-
-      group
-        .append('ellipse')
-        .attr('class', 'orbit-path')
-        .attr('rx', rx * 1.15)
-        .attr('ry', ry * 1.15)
-
-      group
-        .append('ellipse')
-        .attr('class', 'orbit-path dashed')
-        .attr('rx', rx * 0.7)
-        .attr('ry', ry * 0.7)
-
-      const nodeGroups = group
-        .selectAll('g.orbit-node')
-        .data(nodes)
-        .enter()
-        .append('g')
-        .attr('class', (d) => `orbit-node ${d.band}`)
-
-      nodeGroups
-        .append('rect')
-        .attr('x', -45)
-        .attr('y', -45)
-        .attr('width', 90)
-        .attr('height', 90)
-        .attr('rx', 28)
-        .attr('ry', 28)
-
-      nodeGroups
-        .append('text')
-        .attr('text-anchor', 'middle')
-        .attr('alignment-baseline', 'middle')
-        .text((d) => d.label)
-
-      timer = d3.timer(() => {
-        nodeGroups.attr('transform', (d) => {
-          d.angle = (d.angle + d.speed) % (Math.PI * 2)
-          const radiusX = rx + d.offset
-          const radiusY = ry + d.offset * 0.6
-          const x = Math.cos(d.angle) * radiusX
-          const y = Math.sin(d.angle) * radiusY
-          return `translate(${x}, ${y})`
-        })
-      })
-    }
-
-    renderConstellation()
-    const observer = new ResizeObserver(renderConstellation)
-    observer.observe(svgElement)
-
-    return () => {
-      if (timer) timer.stop()
-      observer.disconnect()
-    }
-  }, [])
+  
 
   return (
     <main className="scene">
@@ -344,19 +256,7 @@ function App() {
         </div>
       </section>
 
-      <section className="skills" id="skills">
-        <div className="section-header">
-          <span className="prompt">&gt;_</span>
-          <h2># Skills.json</h2>
-        </div>
-        <div className="skills-constellation">
-          <svg ref={skillsSvgRef} role="img" aria-label="Animated skills orbit" />
-          <div className="skills-core">
-            <span>AI Systems</span>
-          </div>
-          <p className="orbit-hint">Drag to explore skills universe</p>
-        </div>
-      </section>
+      
       
       <section className="projects" id="projects">
       </section>
