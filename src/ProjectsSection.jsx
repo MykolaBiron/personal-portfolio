@@ -10,7 +10,7 @@ import {
 const projects = [
   {
     id: 'p0a1d9',
-    title: 'ARMS v3',
+    title: 'NutrientAI',
     devStatus: null,
     link: '#',
     timeframe: '2025 — Present',
@@ -32,7 +32,7 @@ const projects = [
   },
   {
     id: 'p8c7e5',
-    title: 'XRecon',
+    title: 'Wildlife Image Classifier',
     devStatus: 'Under Development',
     link: '#',
     timeframe: '2026 — Present',
