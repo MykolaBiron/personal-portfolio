@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 import './App.css'
+import profileImg from '../images/photo_2026-03-12_15-16-07.jpg'
 
 const modules = ['React', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Spring']
 
@@ -200,7 +201,7 @@ function App() {
             <div className="avatar-stack">
               <div className="avatar-ring">
                 <img
-                  src="../images/photo_2026-03-12_15-16-07.jpg"
+                  src={profileImg}
                   alt="Portrait of Mykola Biron"
                 />
               </div>
