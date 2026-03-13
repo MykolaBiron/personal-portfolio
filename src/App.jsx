@@ -11,7 +11,7 @@ const commandLog = [
   {
     command: 'whoami',
     output:
-      'Machine learning engineer focused on modern web tooling and neural systems. Shipping reliable AI experiences for startups.',
+      'Machine learning engineer focused on modern web tooling and neural systems. Improving neural networks to solve real-world problems.',
   },
   {
     command: 'cat mission.txt',
@@ -83,7 +83,7 @@ function App() {
           </p>
 
           <div className="cta-row">
-            <button className="primary">View Projects</button>
+            <a href="#projects" className="primary">View Projects</a>
             <a href="https://github.com/MykolaBiron" target="_blank" rel="noopener noreferrer" className="ghost">Visit GitHub</a>
           </div>
 

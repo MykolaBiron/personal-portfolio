@@ -1,11 +1,38 @@
 import React from 'react';
-import { FiFolder, FiExternalLink } from 'react-icons/fi';
+import { FiFolder, FiExternalLink, FiCode } from 'react-icons/fi';
 import { HiOutlineWrenchScrewdriver } from 'react-icons/hi2';
 import { 
-  SiNextdotjs, SiTypescript, SiTailwindcss, SiReact, 
-  SiMongodb, SiAstro, SiVite, SiJavascript, 
-  SiFramer 
+  SiAstro,
+  SiDjango,
+  SiDocker,
+  SiJavascript,
+  SiOpencv,
+  SiPostgresql,
+  SiPython,
+  SiPytorch,
+  SiReact,
+  SiStreamlit,
+  SiTailwindcss,
+  SiTensorflow,
+  SiTypescript,
 } from 'react-icons/si';
+
+const tagIcons = {
+  Python: <SiPython />,
+  Django: <SiDjango />,
+  Tensorflow: <SiTensorflow />,
+  PostgreSQL: <SiPostgresql />,
+  Postgresql: <SiPostgresql />,
+  JavaScript: <SiJavascript />,
+  Docker: <SiDocker />,
+  Astro: <SiAstro />,
+  React: <SiReact />,
+  TypeScript: <SiTypescript />,
+  Tailwind: <SiTailwindcss />,
+  PyTorch: <SiPytorch />,
+  OpenCV: <SiOpencv />,
+  Streamlit: <SiStreamlit />,
+};
 
 const projects = [
   {
@@ -16,8 +43,7 @@ const projects = [
     timeframe: '2025 — Present',
     company: 'Product Build',
     description: 'An AI-powered nutrition tracking application that uses deep learning to identify food from images and automatically track nutritional intake.',
-    icons: [<SiNextdotjs />, <SiTypescript />, <SiTailwindcss />, <SiReact />],
-    tags: ['Next.js', 'TypeScript', 'Tailwind', 'React']
+    tags: ['Python', 'Django', 'Tensorflow', 'Postgresql', 'JavaScript', 'Docker']
   },
   {
     id: 'p3f2b1',
@@ -27,7 +53,6 @@ const projects = [
     timeframe: '2025 — 2026',
     company: 'Product Build',
     description: 'Stay informed about current conditions, forecasts, and astronomical data, and gain valuable insights into current weather patterns and trends.',
-    icons: [<SiAstro />, <SiReact />, <SiTypescript />, <SiTailwindcss />],
     tags: ['Astro', 'React', 'TypeScript', 'Tailwind']
   },
   {
@@ -38,8 +63,7 @@ const projects = [
     timeframe: '2026 — Present',
     company: 'Product Build',
     description: 'Computer Vision app that automates wildlife photography by extracting high-fidelity stills from 4K video',
-    icons: [<SiVite />, <SiReact />, <SiJavascript />, <SiMongodb />],
-    tags: ['Vite', 'React', 'JavaScript', 'MongoDB']
+    tags: ['Python', 'PyTorch', 'OpenCV', 'Docker', "Streamlit"]
   }
 ];
 
@@ -79,8 +103,10 @@ export default function ProjectsSection() {
                     </div>
                     <footer className="project-footer">
                       <div className="project-stack-icons" aria-label={`${project.title} tech stack`}>
-                        {project.icons.map((icon, iconIndex) => (
-                          <span key={`${project.id}-icon-${iconIndex}`}>{icon}</span>
+                        {project.tags.map((tag, iconIndex) => (
+                          <span key={`${project.id}-icon-${iconIndex}`} title={tag} aria-label={tag}>
+                            {tagIcons[tag] ?? <FiCode />}
+                          </span>
                         ))}
                       </div>
                       <div className="project-actions">
@@ -123,8 +149,10 @@ export default function ProjectsSection() {
                     </div>
                     <footer className="project-footer">
                       <div className="project-stack-icons" aria-label={`${project.title} tech stack`}>
-                        {project.icons.map((icon, iconIndex) => (
-                          <span key={`${project.id}-icon-${iconIndex}`}>{icon}</span>
+                        {project.tags.map((tag, iconIndex) => (
+                          <span key={`${project.id}-icon-${iconIndex}`} title={tag} aria-label={tag}>
+                            {tagIcons[tag] ?? <FiCode />}
+                          </span>
                         ))}
                       </div>
                       <div className="project-actions">
