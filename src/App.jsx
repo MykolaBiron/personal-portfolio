@@ -51,6 +51,8 @@ const experience = [
     summary:
       'Optimization of CNN-LSTM-based network architecture for energy consumption forecasting',
     tags: ['Python', 'TensorFlow', 'Docker', 'Pandas', 'Git', 'AWS', 'Git', 'Jira',],
+    actionLabel: 'Read about our work',
+    actionLink: '#',
   },
   {
     id: 'a1b2ca1',
@@ -289,6 +291,13 @@ function App() {
                       <div className="timeline-body">
                         <h3>{entry.title}</h3>
                         <p>{entry.summary}</p>
+                        {entry.actionLink && (
+                          <div style={{ marginTop: '1rem', marginBottom: '1.5rem' }}>
+                            <a href={entry.actionLink} target="_blank" rel="noopener noreferrer" className="project-action-btn">
+                              {entry.actionLabel}
+                            </a>
+                          </div>
+                        )}
                         <div className="tag-grid">
                           {entry.tags.map((tag) => (
                             <span key={tag}>{tag}</span>
@@ -317,6 +326,13 @@ function App() {
                       <div className="timeline-body">
                         <h3>{entry.title}</h3>
                         <p>{entry.summary}</p>
+                        {entry.actionLink && (
+                          <div style={{ marginTop: '1rem', marginBottom: '1.5rem' }}>
+                            <a href={entry.actionLink} target="_blank" rel="noopener noreferrer" className="project-action-btn">
+                              {entry.actionLabel}
+                            </a>
+                          </div>
+                        )}
                         <div className="tag-grid">
                           {entry.tags.map((tag) => (
                             <span key={tag}>{tag}</span>
