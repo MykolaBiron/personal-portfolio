@@ -77,7 +77,7 @@ function App() {
           <h1>
             Hello, I&apos;m <span className="gradient-text">Mykola Biron</span>
           </h1>
-          <p>
+          <p className="hero-description">
             Engineering beyond boundaries. I specialize in neural networks,
             timeseries forecasting, and transformers architectures
           </p>

@@ -562,6 +562,10 @@ h1 {
 }
 
 @media (max-width: 640px) {
+  .hero-description {
+    display: none;
+  }
+
   .scene {
     padding: 3rem 1.25rem;
   }
