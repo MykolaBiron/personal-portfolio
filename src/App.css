@@ -121,6 +121,10 @@ h1 {
   transform: translateY(-3px);
 }
 
+.mobile-modules {
+  display: none;
+}
+
 .modules {
   display: flex;
   flex-direction: column;
@@ -572,6 +576,24 @@ h1 {
 
   .cta-row {
     flex-direction: column;
+  }
+
+  .desktop-modules {
+    display: none;
+  }
+
+  .mobile-modules {
+    display: flex;
+    margin-top: 1.5rem;
+  }
+
+  .code-window pre {
+    padding: 0.8rem 1rem 1rem;
+    font-size: 0.65rem;
+  }
+  
+  .code-line {
+    line-height: 1.4;
   }
 
   .modules ul {

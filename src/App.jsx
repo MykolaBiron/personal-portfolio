@@ -87,7 +87,7 @@ function App() {
             <a href="https://github.com/MykolaBiron" target="_blank" rel="noopener noreferrer" className="ghost">Visit GitHub</a>
           </div>
 
-          <div className="modules">
+          <div className="modules desktop-modules">
             <span>Loaded Modules:</span>
             <ul>
               {modules.map((module) => (
@@ -189,6 +189,15 @@ function App() {
             </div>
             <small>Loading...</small>
           </article>
+        </div>
+
+        <div className="modules mobile-modules">
+          <span>Loaded Modules:</span>
+          <ul>
+            {modules.map((module) => (
+              <li key={module}>{module}</li>
+            ))}
+          </ul>
         </div>
       </section>
 

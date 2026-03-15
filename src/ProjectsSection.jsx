@@ -40,7 +40,7 @@ const projects = [
     title: 'FoodAdvisorAI',
     devStatus: null,
     websiteUrl: 'https://food-advisor-production-3924.up.railway.app/',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/MykolaBiron/Food-Advisor',
     timeframe: '2025 — Present',
     company: 'Product Build',
     description: 'An AI-powered nutrition tracking application that uses deep learning to identify food from images and automatically track nutritional intake.',
