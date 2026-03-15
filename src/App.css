@@ -552,10 +552,6 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .hero-visuals {
-    order: -1;
-  }
-
   .about-grid {
     grid-template-columns: 1fr;
   }
@@ -1035,6 +1031,7 @@ h1 {
 
 .project-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
 }
@@ -1053,16 +1050,48 @@ h1 {
   text-transform: uppercase;
 }
 
-.project-link-inline {
-  width: 30px;
-  height: 30px;
+.project-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.8);
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(255, 107, 44, 0.45);
+  background: rgba(255, 107, 44, 0.12);
+  color: #ffb05e;
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease;
+}
+
+.project-action-btn:hover {
+  border-color: rgba(255, 107, 44, 0.75);
+  color: #ffd1a5;
+  background: rgba(255, 107, 44, 0.2);
+}
+
+.project-action-btn--ghost {
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.project-action-btn--ghost:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.project-link-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }
 
 .project-link-inline:hover {

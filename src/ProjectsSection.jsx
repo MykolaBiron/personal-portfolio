@@ -39,7 +39,8 @@ const projects = [
     id: 'p0a1d9',
     title: 'FoodAdvisorAI',
     devStatus: null,
-    link: '#',
+    websiteUrl: 'https://food-advisor-production-3924.up.railway.app/',
+    githubUrl: '#',
     timeframe: '2025 — Present',
     company: 'Product Build',
     description: 'An AI-powered nutrition tracking application that uses deep learning to identify food from images and automatically track nutritional intake.',
@@ -49,7 +50,8 @@ const projects = [
     id: 'p3f2b1',
     title: 'Vortexa',
     devStatus: null,
-    link: '#',
+    websiteUrl: '#',
+    githubUrl: '#',
     timeframe: '2025 — 2026',
     company: 'Product Build',
     description: 'Stay informed about current conditions, forecasts, and astronomical data, and gain valuable insights into current weather patterns and trends.',
@@ -59,7 +61,8 @@ const projects = [
     id: 'p8c7e5',
     title: 'Wildlife Image Classifier',
     devStatus: 'Under Development',
-    link: '#',
+    websiteUrl: '#',
+    githubUrl: '#',
     timeframe: '2026 — Present',
     company: 'Product Build',
     description: 'Computer Vision app that automates wildlife photography by extracting high-fidelity stills from 4K video',
@@ -115,8 +118,11 @@ export default function ProjectsSection() {
                             <HiOutlineWrenchScrewdriver size={14} /> {project.devStatus}
                           </span>
                         )}
-                        <a href={project.link} className="project-link-inline" aria-label={`Link to ${project.title}`}>
-                          <FiExternalLink size={16} />
+                        <a href={project.websiteUrl} target="_blank" rel="noopener noreferrer" className="project-action-btn" aria-label={`Visit ${project.title} website`}>
+                          Visit
+                        </a>
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="project-action-btn project-action-btn--ghost" aria-label={`View ${project.title} on GitHub`}>
+                          <FiExternalLink size={14} /> View on GitHub
                         </a>
                       </div>
                     </footer>
@@ -161,8 +167,11 @@ export default function ProjectsSection() {
                             <HiOutlineWrenchScrewdriver size={14} /> {project.devStatus}
                           </span>
                         )}
-                        <a href={project.link} className="project-link-inline" aria-label={`Link to ${project.title}`}>
-                          <FiExternalLink size={16} />
+                        <a href={project.websiteUrl} target="_blank" rel="noopener noreferrer" className="project-action-btn" aria-label={`Visit ${project.title} website`}>
+                          Visit
+                        </a>
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="project-action-btn project-action-btn--ghost" aria-label={`View ${project.title} on GitHub`}>
+                          <FiExternalLink size={14} /> View on GitHub
                         </a>
                       </div>
                     </footer>
