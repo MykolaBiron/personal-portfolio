@@ -566,12 +566,16 @@ h1 {
 }
 
 @media (max-width: 640px) {
+  .eyebrow {
+    display: none;
+  }
+
   .hero-description {
     display: none;
   }
 
   .scene {
-    padding: 3rem 1.25rem;
+    padding: 1.5rem 1.25rem;
   }
 
   .cta-row {
@@ -588,12 +592,12 @@ h1 {
   }
 
   .code-window pre {
-    padding: 0.8rem 1rem 1rem;
-    font-size: 0.65rem;
+    padding: 1rem 1.25rem 1.25rem;
+    font-size: 0.75rem;
   }
   
   .code-line {
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   .modules ul {
