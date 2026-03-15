@@ -62,7 +62,7 @@ const projects = [
     title: 'Wildlife Image Classifier',
     devStatus: 'Under Development',
     websiteUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/MykolaBiron/WildFrame',
     timeframe: '2026 — Present',
     company: 'Product Build',
     description: 'Computer Vision app that automates wildlife photography by extracting high-fidelity stills from 4K video',
