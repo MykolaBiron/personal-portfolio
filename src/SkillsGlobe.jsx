@@ -1,179 +1,172 @@
-import React, { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { 
-  SiPython, 
-  SiTensorflow, 
-  SiPytorch, 
-  SiPostgresql, 
-  SiJavascript, 
-  SiReact, 
-  SiDocker, 
-  SiGit, 
-  SiPandas, 
-  SiAmazonaws, 
-  SiSpringboot 
-} from 'react-icons/si';
-import { FaJava } from 'react-icons/fa';
+import { useEffect, useRef } from 'react'
+import * as THREE from 'three'
 
-const skillsData = [
-  { name: 'Python', icon: SiPython, color: '#3776AB' },
-  { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
-  { name: 'Java', icon: FaJava, color: '#007396' },
-  { name: 'PyTorch', icon: SiPytorch, color: '#EE4C2C' },
-  { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
-  { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
-  { name: 'React.js', icon: SiReact, color: '#61DAFB' },
-  { name: 'Docker', icon: SiDocker, color: '#2496ED' },
-  { name: 'Git', icon: SiGit, color: '#F05032' },
-  { name: 'Pandas', icon: SiPandas, color: '#150458' },
-  { name: 'AWS', icon: SiAmazonaws, color: '#FF9900' },
-  { name: 'SpringBoot', icon: SiSpringboot, color: '#6DB33F' },
-];
+const SPHERE_RADIUS = 2.5
+const ICON_SIZE = 0.5
+const FLOAT_OFFSET = 1.05
+
+const mySkills = [
+  { name: 'React', iconUrl: 'https://cdn.simpleicons.org/react/61DAFB' },
+  { name: 'AWS', iconUrl: 'https://cdn.simpleicons.org/aws/FF9900' },
+  { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/F7DF1E' },
+  { name: 'Node.js', iconUrl: 'https://cdn.simpleicons.org/nodedotjs/339933' },
+  { name: 'Three.js', iconUrl: 'https://cdn.simpleicons.org/threedotjs/FFFFFF' },
+  { name: 'Tensorflow', iconUrl: 'https://cdn.simpleicons.org/tensorflow/FF6F00' },
+  { name: 'PyTorch', iconUrl: 'https://cdn.simpleicons.org/pytorch/EE4C2C' },
+  { name: 'Python', iconUrl: 'https://cdn.simpleicons.org/python/3776AB' },
+  { name: 'Docker', iconUrl: 'https://cdn.simpleicons.org/docker/2496ED' },
+  { name: 'Git', iconUrl: 'https://cdn.simpleicons.org/git/F05032' },
+  { name: 'Java', iconUrl: 'https://cdn.simpleicons.org/openjdk/007396' },
+  { name: 'Pandas', iconUrl: 'https://cdn.simpleicons.org/pandas/150458' },
+  { name: 'PostgreSQL', iconUrl: 'https://cdn.simpleicons.org/postgresql/336791' },
+  { name: 'C++', iconUrl: 'https://cdn.simpleicons.org/cplusplus/00599C' },
+  { name: 'Linux', iconUrl: 'https://cdn.simpleicons.org/linux/FCC624' },
+]
 
 export default function SkillsGlobe() {
-  const mountRef = useRef(null);
-  const [positions, setPositions] = useState([]);
-  // Fixed size or responsive sizing
-  const width = 600;
-  const height = 600;
+  const mountRef = useRef(null)
 
   useEffect(() => {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.z = 11;
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    if (mountRef.current) {
-        mountRef.current.appendChild(renderer.domElement);
+    const mountEl = mountRef.current
+    if (!mountEl) {
+      return undefined
     }
 
-    // Creating the wireframe sphere based on the screenshot, it's roughly an Icosahedron
-    const geometry = new THREE.IcosahedronGeometry(3.5, 2);
-    const material = new THREE.MeshBasicMaterial({ 
-      color: 0x4a3a30, // a warm dark bronze/brown as in the design
-      wireframe: true,
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(58, 1, 0.1, 1000)
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.toneMapping = THREE.NoToneMapping
+
+    mountEl.appendChild(renderer.domElement)
+
+    const sphereGroup = new THREE.Group()
+    scene.add(sphereGroup)
+
+    const geometry = new THREE.IcosahedronGeometry(SPHERE_RADIUS, 1)
+    const surfaceMaterial = new THREE.MeshPhongMaterial({
+      color: 0x111111,
       transparent: true,
-      opacity: 0.3
-    });
-    const sphere = new THREE.Mesh(geometry, material);
-    scene.add(sphere);
+      opacity: 0.6,
+      flatShading: true,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    })
+    const sphereSurface = new THREE.Mesh(geometry, surfaceMaterial)
+    sphereGroup.add(sphereSurface)
 
-    // Initial sphere points (distributing items evenly on sphere surface)
-    const items = skillsData.map((_, i) => {
-      const phi = Math.acos(-1 + (2 * i) / skillsData.length);
-      const theta = Math.sqrt(skillsData.length * Math.PI) * phi;
-      const r = 4.2; // radius for icons (slightly larger than sphere)
-      const x = r * Math.cos(theta) * Math.sin(phi);
-      const y = r * Math.sin(theta) * Math.sin(phi);
-      const z = r * Math.cos(phi);
-      return new THREE.Vector3(x, y, z);
-    });
+    const wireframeGeometry = new THREE.WireframeGeometry(geometry)
+    const wireframeMaterial = new THREE.LineBasicMaterial({
+      color: 0x442211,
+      transparent: true,
+      opacity: 0.3,
+    })
+    const sphereLines = new THREE.LineSegments(wireframeGeometry, wireframeMaterial)
+    sphereGroup.add(sphereLines)
 
-    let animationFrameId;
+    const iconsGroup = new THREE.Group()
+    scene.add(iconsGroup)
+
+    const textureLoader = new THREE.TextureLoader()
+    const iconMaterials = []
+
+    mySkills.forEach((skill) => {
+      const texture = textureLoader.load(skill.iconUrl)
+      const spriteMaterial = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+      })
+      const sprite = new THREE.Sprite(spriteMaterial)
+      sprite.scale.set(ICON_SIZE, ICON_SIZE, 1)
+      iconMaterials.push(spriteMaterial)
+      iconsGroup.add(sprite)
+    })
+
+    const total = mySkills.length
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5))
+
+    iconsGroup.children.forEach((sprite, i) => {
+      // Half-step Fibonacci keeps icons away from both poles.
+      const y = 1 - (2 * (i + 0.5)) / total
+      const radius = Math.sqrt(1 - y * y)
+      const theta = goldenAngle * i
+      const x = Math.cos(theta) * radius * SPHERE_RADIUS
+      const z = Math.sin(theta) * radius * SPHERE_RADIUS
+
+      sprite.position.set(x * FLOAT_OFFSET, y * SPHERE_RADIUS * FLOAT_OFFSET, z * FLOAT_OFFSET)
+    })
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
+    directionalLight.position.set(5, 5, 5)
+    scene.add(directionalLight)
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5))
+
+    const worldPos = new THREE.Vector3()
+
+    const resize = () => {
+      const width = mountEl.clientWidth
+      const height = mountEl.clientHeight
+      if (!width || !height) {
+        return
+      }
+
+      camera.aspect = width / height
+      camera.updateProjectionMatrix()
+      camera.position.z = width < 560 ? 9 : 8
+      renderer.setSize(width, height)
+    }
+
+    resize()
+    window.addEventListener('resize', resize)
+
+    let animationFrameId = 0
 
     const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate)
 
-      // Rotate scene slowly
-      scene.rotation.y += 0.003;
-      scene.rotation.x += 0.001;
+      sphereGroup.rotation.z = 0.1
+      iconsGroup.rotation.z = 0.1
 
-      // Project 3D coordinates to 2D
-      const newPos = items.map((vec) => {
-        const p = vec.clone();
-        p.applyMatrix4(scene.matrixWorld);
-        
-        // Depth logic before projection
-        const zDist = p.z; 
+      iconsGroup.children.forEach((sprite) => {
+        sprite.getWorldPosition(worldPos)
+        const minZ = -SPHERE_RADIUS * FLOAT_OFFSET
+        const maxZ = SPHERE_RADIUS * FLOAT_OFFSET
+        let opacity = (worldPos.z - minZ) / (maxZ - minZ)
+        opacity = Math.max(0.12, Math.min(1, opacity))
+        sprite.material.opacity = opacity
+      })
 
-        p.project(camera);
-        // map from normalized device coordinates to container coordinates
-        return {
-          x: (p.x * 0.5 + 0.5) * width,
-          y: (-(p.y * 0.5) + 0.5) * height,
-          z: p.z,
-          zDist: zDist, // real world depth
-        };
-      });
+      sphereGroup.rotation.y += 0.003
+      iconsGroup.rotation.y += 0.003
 
-      setPositions(newPos);
-      renderer.render(scene, camera);
-    };
+      renderer.render(scene, camera)
+    }
 
-    animate();
+    animate()
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
+      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener('resize', resize)
+
+      iconMaterials.forEach((material) => {
+        if (material.map) {
+          material.map.dispose()
+        }
+        material.dispose()
+      })
+
+      sphereSurface.geometry.dispose()
+      surfaceMaterial.dispose()
+      wireframeGeometry.dispose()
+      wireframeMaterial.dispose()
+      renderer.dispose()
+
+      if (mountEl.contains(renderer.domElement)) {
+        mountEl.removeChild(renderer.domElement)
       }
-      renderer.dispose();
-      geometry.dispose();
-      material.dispose();
-    };
-  }, []);
+    }
+  }, [])
 
-  return (
-    <div style={{ position: 'relative', width: `${width}px`, height: `${height}px`, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div 
-        ref={mountRef} 
-        style={{ 
-          position: 'absolute', 
-          top: '50%', left: '50%', 
-          transform: 'translate(-50%, -50%)',
-          pointerEvents: 'none' 
-        }} 
-      />
-      
-      {/* Central icon or text (optional based on design, the user attached image shows GCP or center, let's just make it hollow inside or optional central dot) */}
-      
-      {positions.length > 0 && positions.map((pos, i) => {
-        const ItemIcon = skillsData[i].icon;
-        
-        // Items fading behind the sphere
-        // zDist goes from roughly -4.2 to +4.2
-        const isBehind = pos.zDist < -1;
-        const opacity = isBehind ? 0.3 : 1;
-        // make sure front items appear on top
-        const zIndex = isBehind ? 1 : 10;
-        
-        // Scale elements slightly based on their distance
-        const scale = 1 + (pos.zDist / 12); 
-
-        return (
-          <div 
-            key={i}
-            style={{
-              position: 'absolute',
-              top: pos.y, 
-              left: pos.x,
-              transform: `translate(-50%, -50%) scale(${scale})`,
-              opacity: opacity,
-              zIndex: zIndex,
-              display: 'flex', 
-              flexDirection: 'column', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              transition: 'opacity 0.2s',
-              pointerEvents: 'none'
-            }}
-          >
-            <ItemIcon size={48} color={skillsData[i].color} />
-            <span style={{ 
-              color: '#d9e7ff', 
-              fontSize: '0.85rem', 
-              fontWeight: 'bold', 
-              fontFamily: '"Chivo Mono", monospace',
-              marginTop: '8px', 
-              textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.8)' 
-            }}>
-              {skillsData[i].name}
-            </span>
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <div ref={mountRef} className="skills-globe-canvas" aria-label="3D skills globe animation" />
 }

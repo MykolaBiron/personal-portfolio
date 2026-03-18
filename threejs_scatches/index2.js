@@ -1,120 +1,179 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
 
-const renderer = new THREE.WebGLRenderer({ antialias: true })
-const w = window.innerWidth
-const h = window.innerHeight
-renderer.setSize(w, h)
-document.body.appendChild(renderer.domElement)
+// --- CONFIGURATION ---
+const SPHERE_RADIUS = 2.5; // Slightly larger sphere than before
+const ICON_SIZE = 0.65;      // Size of each icon
 
-const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 100)
-camera.position.set(0, 0, 8)
+// --- 1. SETUP THE SCENE ---
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ 
+  alpha: true, 
+  antialias: true 
+});
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-const scene = new THREE.Scene()
-scene.background = new THREE.Color('#050308')
+// --- 2. THE SKILL DATA ---
+// Replace the 'path/to/icon.png' with your actual image paths.
+const mySkills = [
+  { name: 'React',      iconUrl: 'https://cdn.simpleicons.org/react/61DAFB' },
+  { name: 'AWS',        iconUrl: 'https://cdn.simpleicons.org/aws/FF9900' },
+  { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/F7DF1E' },
+  { name: 'Node.js',    iconUrl: 'https://cdn.simpleicons.org/nodedotjs/339933' },
+  { name: 'Three.js',   iconUrl: 'https://cdn.simpleicons.org/threedotjs/ffffff' }, // Using white for visibility
+  {name: 'Tensorflow', iconUrl: 'https://cdn.simpleicons.org/tensorflow/FF6F00'},
+  { name: 'PyTorch',   iconUrl: 'https://cdn.simpleicons.org/pytorch/EE4C2C' },
+  { name: 'Python',     iconUrl: 'https://cdn.simpleicons.org/python/3776AB' },
+  { name: 'Docker',     iconUrl: 'https://cdn.simpleicons.org/docker/2496ED' },
+  { name: 'Git',        iconUrl: 'https://cdn.simpleicons.org/git/F05032' },
+  { name: 'Java',       iconUrl: 'https://cdn.simpleicons.org/java/007396' },
+  { name: 'Pandas',     iconUrl: 'https://cdn.simpleicons.org/pandas/150458' },
+  {name: 'PostgresQL', iconUrl: 'https://cdn.simpleicons.org/postgresql/336791'},
+  {name: 'C++', iconUrl: 'https://cdn.simpleicons.org/cplusplus/00599C'},
+  {name: 'linux', iconUrl: 'https://cdn.simpleicons.org/linux/000000'},
+  {name: 'SpringBoot', iconUrl: 'https://cdn.simpleicons.org/springboot/6DB33F'},
+];
 
-// skills to show
-const skillImages = [
-  { label: 'Python', url: '../images/python-logo.png' },
-  { label: 'Java', url: '../images/java.png' },
-  { label: 'Docker', url: '../images/docker.png' },
-  { label: 'JavaScript', url: '../images/js_logo.png' },
-  { label: 'PyTorch', url: '../images/pytorch.png' },
-]
+// --- 3. CREATE THE CORE SPHERE GROUP ---
+const sphereGroup = new THREE.Group();
+scene.add(sphereGroup);
 
-const orbitRadiusX = 3
-const orbitRadiusY = 2.2
-const orbitRadiusZ = 3
+// Geometry (Icosahedron for clean triangular faces)
+const geometry = new THREE.IcosahedronGeometry(SPHERE_RADIUS, 1);
 
-// core sphere and wireframe network
-const coreGroup = new THREE.Group()
-scene.add(coreGroup)
+// The Solid Surface (Transparent Black)
+const surfaceMaterial = new THREE.MeshPhongMaterial({ 
+  color: 0x111111, 
+  transparent: true, 
+  opacity: 0.6,
+  flatShading: true,
+  side: THREE.DoubleSide,
+  depthWrite: false, // Essential to see back-side lines
+});
+const sphereSurface = new THREE.Mesh(geometry, surfaceMaterial);
+sphereGroup.add(sphereSurface);
 
-const glowGeom = new THREE.SphereGeometry(2.4, 48, 48)
-const glowMat = new THREE.MeshBasicMaterial({
-  color: 0xffb577,
+// The Triangular Grid (Wireframe)
+const wireframeGeometry = new THREE.WireframeGeometry(geometry);
+const wireframeMaterial = new THREE.LineBasicMaterial({ 
+  color: 0x442211, 
   transparent: true,
-  opacity: 0.08,
-  blending: THREE.AdditiveBlending,
-})
-const glowMesh = new THREE.Mesh(glowGeom, glowMat)
-coreGroup.add(glowMesh)
+  opacity: 0.3
+});
+const sphereLines = new THREE.LineSegments(wireframeGeometry, wireframeMaterial);
+sphereGroup.add(sphereLines);
 
-const solidGeom = new THREE.SphereGeometry(2.15, 64, 64)
-const solidMat = new THREE.MeshStandardMaterial({
-  color: 0x0f0c18,
-  metalness: 0.1,
-  roughness: 0.5,
-  transparent: true,
-  opacity: 0.8,
-})
-const solidMesh = new THREE.Mesh(solidGeom, solidMat)
-coreGroup.add(solidMesh)
+// --- 4. POPULATE THE SKILL ICONS (SPRITES) ---
 
-const wireGeom = new THREE.IcosahedronGeometry(2.1, 2)
-const wireEdges = new THREE.EdgesGeometry(wireGeom)
-const wireMat = new THREE.LineBasicMaterial({
-  color: 0xff7448,
-  transparent: true,
-  opacity: 0.45,
-})
-const wireframe = new THREE.LineSegments(wireEdges, wireMat)
-coreGroup.add(wireframe)
+const textureLoader = new THREE.TextureLoader();
 
-const connectLines = new THREE.LineSegments(
-  new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(2.05, 3)),
-  new THREE.LineBasicMaterial({
-    color: 0x9c4c2f,
+/**
+ * Utility: Creates a Sprite from a image URL
+ */
+function createSprite(iconUrl) {
+  const texture = textureLoader.load(iconUrl);
+  // Optional: texture.anisotropy = 16; // for cleaner look at extreme angles
+  
+  const spriteMaterial = new THREE.SpriteMaterial({ 
+    map: texture, 
     transparent: true,
-    opacity: 0.18,
-  })
-)
-coreGroup.add(connectLines)
-
-const ambient = new THREE.AmbientLight(0xffa46b, 0.4)
-scene.add(ambient)
-
-const keyLight = new THREE.PointLight(0xff7c3c, 1.2, 30)
-keyLight.position.set(4, 5, 6)
-scene.add(keyLight)
-
-const rimLight = new THREE.PointLight(0x6ab0ff, 0.9, 25)
-rimLight.position.set(-4, -3, -5)
-scene.add(rimLight)
-
-const loader = new THREE.TextureLoader()
-skillImages.forEach((skill, index) => {
-  const texture = loader.load(skill.url)
-  texture.colorSpace = THREE.SRGBColorSpace
-
-  const material = new THREE.SpriteMaterial({ map: texture, transparent: true })
-  const sprite = new THREE.Sprite(material)
-  sprite.scale.set(1.2, 1.2, 1.2) // controls icon size
-
-  const angle = (index / skillImages.length) * Math.PI * 2
-  const x = Math.cos(angle) * orbitRadiusX
-  const y = Math.sin(angle) * orbitRadiusY
-  const z = Math.sin(angle * 0.5) * 0.3 // slight depth wobble so they aren’t on a flat plane
-  sprite.position.set(x, y, z)
-
-  // face the camera (sprites do this automatically), but add subtle bobbing
-  sprite.userData = { angle, speed: 0.002 + 0.0005 * index }
-  scene.add(sprite)
-})
-
-// animate orbit
-function animate() {
-  requestAnimationFrame(animate)
-  coreGroup.rotation.y += 0.0015
-  coreGroup.rotation.x = Math.sin(Date.now() * 0.0002) * 0.08
-  scene.traverse((obj) => {
-    if (obj.isSprite && obj.userData) {
-      const data = obj.userData
-      data.angle += data.speed
-      obj.position.x = Math.cos(data.angle) * orbitRadiusX
-      obj.position.y = Math.sin(data.angle) * orbitRadiusY
-      obj.position.z = Math.sin(data.angle * 0.6) * 0.35
-    }
-  })
-  renderer.render(scene, camera)
+    blending: THREE.AdditiveBlending
+  });
+  
+  const sprite = new THREE.Sprite(spriteMaterial);
+  sprite.scale.set(ICON_SIZE, ICON_SIZE, 1);
+  return sprite;
 }
-animate()
+
+// Group to hold all sprites
+const iconsGroup = new THREE.Group();
+scene.add(iconsGroup); // IMPORTANT: Add directly to scene so they don't 'lean' when the main sphere rotates
+
+// Function to calculate and place sprites
+function placeIconsOnSphere() {
+  const N = mySkills.length;
+  const GOLDEN_RATIO = Math.PI * (3 - Math.sqrt(5)); // ~2.39996323
+
+  for (let i = 0; i < N; i++) {
+    // 1. Half-step offset keeps points away from the exact top/bottom poles.
+    const y = 1 - (2 * (i + 0.5)) / N;
+    const radius = Math.sqrt(1 - y * y);
+
+    const theta = GOLDEN_RATIO * i; // Golden angle increment
+
+    // 2. Map to 3D Cartesian coordinates (x,y,z) on the sphere's surface
+    const x = Math.cos(theta) * radius * SPHERE_RADIUS;
+    const z = Math.sin(theta) * radius * SPHERE_RADIUS;
+
+    // 3. Create and position the Sprite
+    const skill = mySkills[i];
+    const sprite = createSprite(skill.iconUrl);
+    
+    // We add a slight offset so they 'float' just above the surface
+    const FLOAT_OFFSET = 1.05; 
+    sprite.position.set(x * FLOAT_OFFSET, y * SPHERE_RADIUS * FLOAT_OFFSET, z * FLOAT_OFFSET);
+    
+    // 4. Attach a name data field (for later interaction like hovering)
+    sprite.userData = { skillName: skill.name };
+    
+    iconsGroup.add(sprite);
+  }
+}
+
+placeIconsOnSphere();
+
+// --- 5. LIGHTING ---
+const light = new THREE.DirectionalLight(0xffffff, 2);
+light.position.set(5, 5, 5);
+scene.add(light);
+scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+// --- 6. ANIMATION LOOP ---
+camera.position.z = 8; // Pull camera back to see the whole sphere
+
+function animate() {
+  requestAnimationFrame(animate);
+  sphereGroup.rotation.z = 0.1; // Rotate the main sphere core
+  iconsGroup.rotation.z = 0.1; // Also rotate the icons group so they follow the movement,
+
+  iconsGroup.children.forEach((sprite) => {
+    // 1. Get the sprite's position relative to the camera
+    const vector = new THREE.Vector3();
+    sprite.getWorldPosition(vector);
+    
+    // 2. Calculate distance or simply use the Z-value
+    // Since camera is at Z=8, a sprite at Z=2.5 is 'front', Z=-2.5 is 'back'
+    // Map Z-range [-2.5, 2.5] to Opacity range [0.1, 1.0]
+    const minZ = -SPHERE_RADIUS;
+    const maxZ = SPHERE_RADIUS;
+    
+    let opacity = (vector.z - minZ) / (maxZ - minZ);
+    
+    // 3. Clamp the value so it doesn't go below 0.1 or above 1.0
+    opacity = Math.max(0.1, Math.min(1.0, opacity));
+    
+    // 4. Apply to material
+    sprite.material.opacity = opacity;
+  });
+  
+  // Rotate the main sphere core
+  sphereGroup.rotation.y += 0.003;
+  
+  // Also rotate the icons group so they follow the movement,
+  // but they will maintain their billboarding facing the camera.
+  iconsGroup.rotation.y += 0.003;
+  
+  renderer.render(scene, camera);
+}
+
+// Window resizing handler
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+renderer.toneMapping = THREE.NoToneMapping;
+
+animate();

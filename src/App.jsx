@@ -1,10 +1,9 @@
-import { useEffect, useRef } from 'react'
-import * as d3 from 'd3'
 import './App.css'
 import profileImg from '../images/photo_2026-03-12_15-16-07.jpg'
 
 import ProjectsSection from './ProjectsSection'
 import MobileNav from './MobileNav'
+import SkillsGlobe from './SkillsGlobe'
 const modules = ['React', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Spring']
 
 const commandLog = [
@@ -261,6 +260,24 @@ function App() {
           ))}
         </div>
       </section>
+
+      <section className="skill-json" id="skills">
+        <div className="section-header">
+          <span className="prompt">{'{}'}</span>
+          <h2># skill.json</h2>
+        </div>
+
+        <div className="skill-json-grid">
+          <article className="skill-json-card">
+            <header>
+              <span className="skill-json-title">runtime.skills</span>
+              <span className="skill-json-subtitle">3D modules loaded</span>
+            </header>
+            <SkillsGlobe />
+          </article>
+        </div>
+      </section>
+
       <section className="timeline" id="experience">
         <div className="section-header">
           <span className="prompt">⌘</span>
