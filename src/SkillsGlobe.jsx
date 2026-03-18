@@ -2,14 +2,15 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 const SPHERE_RADIUS = 2.5
-const ICON_SIZE = 0.5
+const ICON_SIZE = 0.58
 const FLOAT_OFFSET = 1.05
 
 const mySkills = [
   { name: 'React', iconUrl: 'https://cdn.simpleicons.org/react/61DAFB' },
-  { name: 'AWS', iconUrl: 'https://cdn.simpleicons.org/aws/FF9900' },
+  { name: 'AWS', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
   { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/F7DF1E' },
   { name: 'Node.js', iconUrl: 'https://cdn.simpleicons.org/nodedotjs/339933' },
+  {'name': 'Django', iconUrl: 'https://cdn.simpleicons.org/django/092E20'},
   { name: 'Three.js', iconUrl: 'https://cdn.simpleicons.org/threedotjs/FFFFFF' },
   { name: 'Tensorflow', iconUrl: 'https://cdn.simpleicons.org/tensorflow/FF6F00' },
   { name: 'PyTorch', iconUrl: 'https://cdn.simpleicons.org/pytorch/EE4C2C' },
@@ -21,7 +22,7 @@ const mySkills = [
   { name: 'PostgreSQL', iconUrl: 'https://cdn.simpleicons.org/postgresql/336791' },
   { name: 'C++', iconUrl: 'https://cdn.simpleicons.org/cplusplus/00599C' },
   { name: 'Linux', iconUrl: 'https://cdn.simpleicons.org/linux/FCC624' },
-  {name: ' VSCode', iconUrl: 'https://cdn.simpleicons.org/visualstudiocode/007ACC'},
+  { name: 'VS Code', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
 ]
 
 export default function SkillsGlobe() {
