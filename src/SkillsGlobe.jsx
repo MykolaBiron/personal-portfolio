@@ -21,6 +21,7 @@ const mySkills = [
   { name: 'PostgreSQL', iconUrl: 'https://cdn.simpleicons.org/postgresql/336791' },
   { name: 'C++', iconUrl: 'https://cdn.simpleicons.org/cplusplus/00599C' },
   { name: 'Linux', iconUrl: 'https://cdn.simpleicons.org/linux/FCC624' },
+  {name: ' VSCode', iconUrl: 'https://cdn.simpleicons.org/visualstudiocode/007ACC'},
 ]
 
 export default function SkillsGlobe() {
