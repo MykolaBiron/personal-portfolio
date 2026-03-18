@@ -10,7 +10,7 @@ const mySkills = [
   { name: 'AWS', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
   { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/F7DF1E' },
   { name: 'Node.js', iconUrl: 'https://cdn.simpleicons.org/nodedotjs/339933' },
-  {'name': 'Django', iconUrl: 'https://cdn.simpleicons.org/django/092E20'},
+  { name: 'Django', iconUrl: 'https://cdn.simpleicons.org/django/092E20' },
   { name: 'Three.js', iconUrl: 'https://cdn.simpleicons.org/threedotjs/FFFFFF' },
   { name: 'Tensorflow', iconUrl: 'https://cdn.simpleicons.org/tensorflow/FF6F00' },
   { name: 'PyTorch', iconUrl: 'https://cdn.simpleicons.org/pytorch/EE4C2C' },
