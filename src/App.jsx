@@ -89,14 +89,6 @@ function App() {
             <a href="https://github.com/MykolaBiron" target="_blank" rel="noopener noreferrer" className="ghost">Visit GitHub</a>
           </div>
 
-          <div className="modules desktop-modules">
-            <span>Loaded Modules:</span>
-            <ul>
-              {modules.map((module) => (
-                <li key={module}>{module}</li>
-              ))}
-            </ul>
-          </div>
         </div>
 
         <div className="hero-visuals">
