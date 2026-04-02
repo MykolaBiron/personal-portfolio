@@ -50,16 +50,14 @@ const experience = [
     summary:
       'Optimization of CNN-LSTM-based network architecture for energy consumption forecasting',
     tags: ['Python', 'TensorFlow', 'Docker', 'Pandas', 'Git', 'AWS', 'Git', 'Jira',],
-    actionLabel: 'Read about our work',
-    actionLink: '#',
   },
   {
     id: 'a1b2ca1',
-    title: 'Full Stack Developer',
-    company: 'Freelance · Upwork / Fiverr',
-    timeframe: '2022-06 — 2024-05',
-    summary: 'Developed and maintained web applications for international clients across finance and education.',
-    tags: ['JavaScript', 'Express', 'PostgreSQL', 'React'],
+    title: 'Java Tutor',
+    company: 'HAW Hamburg',
+    timeframe: '2025-06 — 2026-01',
+    summary: 'Taught core Java topics (OOP, control flow, data structures, debugging) to first-semester students in weekly sessions.',
+    tags: ['Java', 'Intellij', 'SQL'],
   },
 ]
 

@@ -48,14 +48,14 @@ const projects = [
   },
   {
     id: 'p3f2b1',
-    title: 'Vortexa',
+    title: 'Football Live Predictor',
     devStatus: null,
     websiteUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/MykolaBiron/soccer-live-predictor',
     timeframe: '2025 — 2026',
     company: 'Product Build',
-    description: 'Stay informed about current conditions, forecasts, and astronomical data, and gain valuable insights into current weather patterns and trends.',
-    tags: ['Astro', 'React', 'TypeScript', 'Tailwind']
+    description: 'A full-stack SpringBoot + React application for real-time footbal matches tracking.',
+    tags: ['SpringBoot', 'React', 'TypeScript', 'PostgreSQL']
   },
   {
     id: 'p8c7e5',
