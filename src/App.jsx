@@ -47,7 +47,8 @@ const experience = [
     title: 'Working Student Cloud Development',
     company: 'Otto GmbH',
     timeframe: '2025-05 - Present',
-    summary: 'Development of services for Customer Communication using Java Micronaut and AWS'
+    summary: 'Development of services for Customer Communication using Java Micronaut and AWS',
+    tags: ['Java', 'Micronaut', 'Docker', 'AWS', 'Git', 'AWS', 'Kafka'],
   },
   {
     id: 'a1b2ca2',
