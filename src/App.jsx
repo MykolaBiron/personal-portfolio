@@ -43,6 +43,13 @@ const skills = [
 
 const experience = [
   {
+    id: 'a1b2ca3',
+    title: 'Working Student Cloud Development',
+    company: 'Otto GmbH',
+    timeframe: '2025-05 - Present',
+    summary: 'Development of services for Customer Communication using Java Micronaut and AWS'
+  },
+  {
     id: 'a1b2ca2',
     title: 'Student Research Assistant',
     company: 'Hamburg University of Applied Sciences',
