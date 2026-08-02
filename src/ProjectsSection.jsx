@@ -36,6 +36,17 @@ const tagIcons = {
 
 const projects = [
   {
+    id: 'p3f2b1',
+    title: 'AI Resume Enchancer',
+    devStatus: null,
+    websiteUrl: '#',
+    githubUrl: 'https://github.com/MykolaBiron/soccer-live-predictor',
+    timeframe: '2025 — 2026',
+    company: 'Product Build',
+    description: 'A full-stack React.js + Node.js application for jobseekers in Germany',
+    tags: ['React.js', 'Node.js', 'TypeScript', 'PostgreSQL']
+  },
+  {
     id: 'p0a1d9',
     title: 'FoodAdvisorAI',
     devStatus: null,
@@ -45,17 +56,6 @@ const projects = [
     company: 'Product Build',
     description: 'An AI-powered nutrition tracking application that uses deep learning to identify food from images and automatically track nutritional intake.',
     tags: ['Python', 'Django', 'Tensorflow', 'Postgresql', 'JavaScript', 'Docker']
-  },
-  {
-    id: 'p3f2b1',
-    title: 'Football Live Predictor',
-    devStatus: null,
-    websiteUrl: '#',
-    githubUrl: 'https://github.com/MykolaBiron/soccer-live-predictor',
-    timeframe: '2025 — 2026',
-    company: 'Product Build',
-    description: 'A full-stack SpringBoot + React application for real-time footbal matches tracking.',
-    tags: ['SpringBoot', 'React', 'TypeScript', 'PostgreSQL']
   },
   {
     id: 'p8c7e5',
