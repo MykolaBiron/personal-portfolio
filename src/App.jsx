@@ -10,7 +10,7 @@ const commandLog = [
   {
     command: 'whoami',
     output:
-      'Machine learning engineer focused on modern web tooling and neural systems. Improving neural networks to solve real-world problems.',
+      'Software engineer focused on cloud infrastructure and neural systems. Improving neural networks to solve real-world problems.',
   },
   {
     command: 'cat mission.txt',
@@ -46,9 +46,9 @@ const experience = [
     id: 'a1b2ca3',
     title: 'Working Student Cloud Development',
     company: 'Otto GmbH',
-    timeframe: '2025-05 - Present',
+    timeframe: '2026-05 - Present',
     summary: 'Development of services for Customer Communication using Java Micronaut and AWS',
-    tags: ['Java', 'Micronaut', 'Docker', 'AWS', 'Git', 'AWS', 'Kafka'],
+    tags: ['Java', 'Micronaut', 'Docker', 'AWS', 'Git', 'Linux'],
   },
   {
     id: 'a1b2ca2',
