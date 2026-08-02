@@ -224,7 +224,7 @@ function App() {
               </li>
               <li>
                 <span className="label">Role</span>
-                <span className="value">MACHINE_LEARNING_ENGINEER</span>
+                <span className="value">CLOUD_ENGINEER</span>
               </li>
               <li>
                 <span className="label">Location</span>
