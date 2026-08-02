@@ -146,7 +146,7 @@ function App() {
                 <span className="code-line indent-3">
                   <span className="token attr">role</span>
                   <span className="token operator">=</span>
-                  <span className="token string">"Machine Learning Engineer"</span>
+                  <span className="token string">"Software / Cloud Engineer"</span>
                 </span>
                 <span className="code-line indent-3">
                   <span className="token attr">passion</span>
