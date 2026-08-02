@@ -85,8 +85,7 @@ function App() {
             Hello, I&apos;m <span className="gradient-text">Mykola Biron</span>
           </h1>
           <p className="hero-description">
-            Engineering beyond boundaries. I specialize in neural networks,
-            timeseries forecasting, and transformers architectures
+            Engineering beyond boundaries. I specialize in cloud infrastructure and backend enginering with java.
           </p>
 
           <div className="cta-row">
