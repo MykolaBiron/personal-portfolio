@@ -39,7 +39,7 @@ const projects = [
     id: 'p3f2b1',
     title: 'AI Resume Enchancer',
     devStatus: null,
-    websiteUrl: '#',
+    websiteUrl: 'https://lebenslaufmeister.de/',
     githubUrl: 'https://github.com/MykolaBiron/soccer-live-predictor',
     timeframe: '2025 — 2026',
     company: 'Product Build',
