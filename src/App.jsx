@@ -4,6 +4,7 @@ import profileImg from '../images/photo_2026-03-12_15-16-07.jpg'
 import ProjectsSection from './ProjectsSection'
 import MobileNav from './MobileNav'
 import SkillsGlobe from './SkillsGlobe'
+import ContributionGraph from './ContributionGraph'
 const modules = ['React', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Spring']
 
 const commandLog = [
@@ -17,12 +18,6 @@ const commandLog = [
     output:
       'Translate complex data problems into approachable products. Currently building forecasting pipelines, real-time inference, and ergonomic developer tooling.',
   },
-]
-
-const metrics = [
-  { label: 'Experience', value: '1+', unit: 'yrs' },
-  { label: 'Projects', value: '15+', unit: 'deploys' },
-  { label: 'Caffeine', value: '∞', unit: 'ml' },
 ]
 
 const skills = [
@@ -253,17 +248,7 @@ function App() {
           </article>
         </div>
 
-        <div className="about-metrics">
-          {metrics.map((metric) => (
-            <div key={metric.label} className="metric-card">
-              <p className="metric-label">{metric.label}</p>
-              <p className="metric-value">
-                {metric.value}
-                <span>{metric.unit}</span>
-              </p>
-            </div>
-          ))}
-        </div>
+        <ContributionGraph />
       </section>
 
       <section className="skill-json" id="skills">
