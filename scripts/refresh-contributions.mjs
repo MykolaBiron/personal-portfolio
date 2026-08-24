@@ -79,22 +79,34 @@ const fetchPublic = async () => {
 }
 
 // Only needed for the authenticated path: GraphQL returns counts but no level
-// buckets, so approximate GitHub's quartiles-of-busiest-day banding.
-const levelFor = (count, busiest) => {
+// buckets. Band by quantiles of the active days rather than by a share of the
+// busiest day — one outlier day would otherwise flatten everything to level 1.
+const bandsFrom = (counts) => {
+  const active = counts.filter((c) => c > 0).sort((a, b) => a - b)
+  const at = (p) => {
+    const i = (active.length - 1) * p
+    const lo = Math.floor(i)
+    const hi = Math.min(lo + 1, active.length - 1)
+    return active[lo] + (active[hi] - active[lo]) * (i - lo)
+  }
+  return active.length ? [at(0.25), at(0.5), at(0.75)] : [0, 0, 0]
+}
+
+const levelFor = (count, bands) => {
   if (count === 0) return 0
-  const share = count / Math.max(busiest, 1)
-  if (share > 0.75) return 4
-  if (share > 0.5) return 3
-  if (share > 0.25) return 2
-  return 1
+  if (count <= bands[0]) return 1
+  if (count <= bands[1]) return 2
+  if (count <= bands[2]) return 3
+  return 4
 }
 
 const { days, total, private: restricted } = TOKEN ? await fetchAuthenticated() : await fetchPublic()
 days.sort((a, b) => a.date.localeCompare(b.date))
 
 const busiest = days.reduce((max, day) => Math.max(max, day.count), 0)
+const bands = bandsFrom(days.map((day) => day.count))
 // Prefer GitHub's own buckets when the public path supplied them.
-const levels = days.map((day) => day.level ?? levelFor(day.count, busiest)).join('')
+const levels = days.map((day) => day.level ?? levelFor(day.count, bands)).join('')
 const counts = days.map((day) => day.count)
 
 writeFileSync(

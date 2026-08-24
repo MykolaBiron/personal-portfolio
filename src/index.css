@@ -35,6 +35,13 @@ body {
   min-height: 100vh;
 }
 
+/* Sole flex item of a flex body: without a definite width it is max-content
+   sized, so any wide descendant stretches the whole page past the viewport. */
+#root {
+  width: 100%;
+  min-width: 0;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

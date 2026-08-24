@@ -5,6 +5,8 @@ import ProjectsSection from './ProjectsSection'
 import MobileNav from './MobileNav'
 import SkillsGlobe from './SkillsGlobe'
 import ContributionGraph from './ContributionGraph'
+import HeroName from './HeroName'
+import FooterDissolve from './FooterDissolve'
 const modules = ['React', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Spring']
 
 const commandLog = [
@@ -76,9 +78,7 @@ function App() {
         <div className="hero-copy">
           <span className="status-pill">system.kernel :: v2.5.0 online</span>
           <p className="eyebrow">Architect</p>
-          <h1>
-            Hello, I&apos;m <span className="gradient-text">Mykola Biron</span>
-          </h1>
+          <HeroName />
           <p className="hero-description">
             Engineering beyond boundaries. I specialize in cloud infrastructure and backend enginering with java.
           </p>
@@ -393,7 +393,7 @@ function App() {
       <MobileNav />
       <footer className="site-footer">
         <div>
-        <p className="footer-name">Mykola Biron</p>
+          <FooterDissolve />
           <p>&copy; Mykola Biron {new Date().getFullYear()} All rights reserved.</p>
         </div>
       </footer>
