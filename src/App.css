@@ -1301,11 +1301,11 @@ h1 {
 .contrib-graph {
   /* Swap these five stops for GitHub greens (#0e4429 … #39d353) if you'd
      rather the graph read as GitHub than as the rest of the site. */
-  --contrib-0: rgba(255, 255, 255, 0.055);
-  --contrib-1: #4a2409;
-  --contrib-2: #8a3d0c;
-  --contrib-3: #d9631a;
-  --contrib-4: #ffa85c;
+  --contrib-0: rgba(255, 255, 255, 0.06);
+  --contrib-1: #7c3a0f;
+  --contrib-2: #b85c17;
+  --contrib-3: #e8832c;
+  --contrib-4: #ffb35c;
   --contrib-gap: 3px;
 
   position: relative;
@@ -1313,6 +1313,11 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
+  /* body is display:flex/row, so #root is max-content sized: without a
+     viewport-relative cap the 640px plot stretches .scene past the screen and
+     overflow:hidden clips it instead of letting .contrib-scroll scroll. */
+  min-width: 0;
+  max-width: min(100%, calc(100vw - 4rem));
   padding: 1.5rem clamp(1.25rem, 3vw, 2rem);
   background: linear-gradient(180deg, rgba(11, 10, 23, 0.95), rgba(5, 3, 8, 0.9));
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -1411,6 +1416,8 @@ h1 {
 }
 
 .contrib-scroll {
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 0.25rem;
