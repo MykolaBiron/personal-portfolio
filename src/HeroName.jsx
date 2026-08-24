@@ -12,13 +12,15 @@ const line = (
   </>
 )
 
-export default function HeroName() {
+export default function HeroName({ ready: gate = true }) {
   // Hold the reveal until webfonts settle, otherwise a first-visit font swap
   // lands mid-animation and the extrusion visibly jumps.
   const [ready, setReady] = useState(() => prefersReducedMotion())
 
   useEffect(() => {
-    if (prefersReducedMotion()) return undefined
+    // Without the gate the reveal would play behind the intro overlay and be
+    // over before the visitor ever sees the hero.
+    if (!gate || prefersReducedMotion()) return undefined
     let cancelled = false
     const start = () => {
       if (!cancelled) setReady(true)
@@ -29,7 +31,7 @@ export default function HeroName() {
       cancelled = true
       clearTimeout(timer)
     }
-  }, [])
+  }, [gate])
 
   return (
     <h1 className={`hero-name${ready ? ' is-live' : ''}`}>

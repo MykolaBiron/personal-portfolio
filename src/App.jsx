@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import profileImg from '../images/photo_2026-03-12_15-16-07.jpg'
 
@@ -7,6 +8,7 @@ import SkillsGlobe from './SkillsGlobe'
 import ContributionGraph from './ContributionGraph'
 import HeroName from './HeroName'
 import FooterDissolve from './FooterDissolve'
+import IntroLoader from './IntroLoader'
 const modules = ['React', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Spring']
 
 const commandLog = [
@@ -67,9 +69,17 @@ const experience = [
 ]
 
 function App() {
-  
+  const [introDone, setIntroDone] = useState(false)
+  const finishIntro = useCallback(() => setIntroDone(true), [])
+
+  useEffect(() => {
+    document.body.classList.toggle('intro-active', !introDone)
+    return () => document.body.classList.remove('intro-active')
+  }, [introDone])
 
   return (
+    <>
+    {!introDone && <IntroLoader onDone={finishIntro} />}
     <main className="scene">
       <div className="grid-overlay" aria-hidden="true" />
       <div className="noise-overlay" aria-hidden="true" />
@@ -78,7 +88,7 @@ function App() {
         <div className="hero-copy">
           <span className="status-pill">system.kernel :: v2.5.0 online</span>
           <p className="eyebrow">Architect</p>
-          <HeroName />
+          <HeroName ready={introDone} />
           <p className="hero-description">
             Engineering beyond boundaries. I specialize in cloud infrastructure and backend enginering with java.
           </p>
@@ -398,6 +408,7 @@ function App() {
         </div>
       </footer>
     </main>
+    </>
   )
 }
 

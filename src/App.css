@@ -1832,3 +1832,38 @@ h1 {
   white-space: nowrap;
   border: 0;
 }
+
+/* ── intro loader ──────────────────────────────────────────────────────── */
+
+.intro-loader {
+  position: fixed;
+  inset: 0;
+  /* Above .mobile-nav, which also sits at 100 and would otherwise draw over it. */
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(1.5rem, 6vw, 5rem);
+  background: radial-gradient(circle at 50% 45%, rgba(255, 102, 0, 0.1), transparent 55%), #050308;
+  transition: opacity 480ms ease, visibility 480ms ease;
+}
+
+.intro-loader.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.intro-loader canvas {
+  display: block;
+  width: min(100%, 900px);
+}
+
+body.intro-active {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-loader {
+    display: none;
+  }
+}
