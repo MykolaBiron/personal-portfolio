@@ -4,6 +4,7 @@ import * as THREE from 'three'
 const SPHERE_RADIUS = 2.5
 const ICON_SIZE = 0.58
 const FLOAT_OFFSET = 1.05
+const ICON_TEXTURE_PX = 256
 
 const mySkills = [
   { name: 'React', iconUrl: 'https://cdn.simpleicons.org/react/61DAFB' },
@@ -69,20 +70,47 @@ export default function SkillsGlobe() {
     const iconsGroup = new THREE.Group()
     scene.add(iconsGroup)
 
-    const textureLoader = new THREE.TextureLoader()
     const iconMaterials = []
+    const iconTextures = []
+    let disposed = false
+
+    // THREE.TextureLoader yields nothing usable on the GPU for these SVG icon
+    // URLs — the images decode fine but the sprites render empty. Rasterising
+    // each one into a canvas first and using CanvasTexture works.
+    const loadIcon = (url, material) => {
+      const image = new Image()
+      image.crossOrigin = 'anonymous'
+      image.onload = () => {
+        if (disposed) return
+        const canvas = document.createElement('canvas')
+        canvas.width = ICON_TEXTURE_PX
+        canvas.height = ICON_TEXTURE_PX
+        canvas.getContext('2d').drawImage(image, 0, 0, ICON_TEXTURE_PX, ICON_TEXTURE_PX)
+
+        const texture = new THREE.CanvasTexture(canvas)
+        texture.colorSpace = THREE.SRGBColorSpace
+        texture.anisotropy = renderer.capabilities.getMaxAnisotropy()
+        iconTextures.push(texture)
+
+        material.map = texture
+        material.needsUpdate = true
+        material.visible = true
+      }
+      image.src = url
+    }
 
     mySkills.forEach((skill) => {
-      const texture = textureLoader.load(skill.iconUrl)
       const spriteMaterial = new THREE.SpriteMaterial({
-        map: texture,
         transparent: true,
         blending: THREE.AdditiveBlending,
+        // Stay hidden until the icon arrives, or it flashes as a white square.
+        visible: false,
       })
       const sprite = new THREE.Sprite(spriteMaterial)
       sprite.scale.set(ICON_SIZE, ICON_SIZE, 1)
       iconMaterials.push(spriteMaterial)
       iconsGroup.add(sprite)
+      loadIcon(skill.iconUrl, spriteMaterial)
     })
 
     const total = mySkills.length
@@ -148,8 +176,11 @@ export default function SkillsGlobe() {
     animate()
 
     return () => {
+      disposed = true
       cancelAnimationFrame(animationFrameId)
       window.removeEventListener('resize', resize)
+
+      iconTextures.forEach((texture) => texture.dispose())
 
       iconMaterials.forEach((material) => {
         if (material.map) {
